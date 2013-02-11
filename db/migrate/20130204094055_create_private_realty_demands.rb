@@ -1,0 +1,19 @@
+class CreatePrivateRealtyDemands < ActiveRecord::Migration
+  def change
+    create_table :private_realty_demands do |t|
+      t.string :District
+      t.string :Street
+      t.decimal :Price
+      t.integer :Count_of_rooms
+      t.string :Condition
+      t.decimal :Square
+      t.string :Type
+      t.string :Heating
+      t.integer :Contacts
+      t.string :Buyer
+      t.string :Other
+
+      t.timestamps
+    end
+  end
+end

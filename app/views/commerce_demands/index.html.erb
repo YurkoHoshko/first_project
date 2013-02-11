@@ -1,0 +1,58 @@
+<%- model_class = CommerceDemand -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:district) %></th>
+      <th><%= model_class.human_attribute_name(:street) %></th>
+      <th><%= model_class.human_attribute_name(:square) %></th>
+      <th><%= model_class.human_attribute_name(:price) %></th>
+      <th><%= model_class.human_attribute_name(:reason) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  
+
+ <tr>
+	<%= form_tag commerce_demands_path, :method =>'get' do %>
+	<td></td>
+	<td><%= text_field_tag :search, params[:search] %></td>
+    	<td><%= text_field_tag :search1, params[:search1] %></td>
+	<td></td><td></td><td></td>
+    	<td><%= submit_tag "Search", :name => nil, :class => 'btn btn-medium' %></td>
+  	
+	<% end %>
+
+
+      </tr>
+</thead>
+  <tbody>
+<tr></tr>
+    <% @commerce_demands.each do |commerce_demand| %>
+     
+      <tr>
+        <td><%= link_to commerce_demand.id, commerce_demand_path(commerce_demand) %></td>
+        <td><%= commerce_demand.district %></td>
+        <td><%= commerce_demand.street %></td>
+        <td><%= commerce_demand.square %></td>
+        <td><%= commerce_demand.price %></td>
+        <td><%= commerce_demand.reason %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_commerce_demand_path(commerce_demand), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      commerce_demand_path(commerce_demand),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_commerce_demand_path,
+            :class => 'btn btn-primary' %>

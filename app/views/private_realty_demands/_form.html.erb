@@ -1,0 +1,74 @@
+<%= form_for @private_realty_demand, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :District, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :District, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Street, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :Street, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Price, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :Price, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Count_of_rooms, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :Count_of_rooms, :class => 'number_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Condition, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :Condition, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Square, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :Square, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Type, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :Type, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Heating, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :Heating, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Contacts, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :Contacts, :class => 'number_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Buyer, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :Buyer, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Other, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :Other, :class => 'text_field' %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                private_realty_demands_path, :class => 'btn' %>
+  </div>
+<% end %>

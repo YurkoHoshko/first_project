@@ -1,0 +1,44 @@
+<%= form_for @demand, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :Район, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :district, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Вулиця, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :street, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Ціна, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :price, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Кількість_кімнат, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :count_of_rooms, :class => 'number_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Власник, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :owner_name, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Контакти_власника, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :owner_phone, :class => 'text_field' %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit  :Оновити, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("Відміна")),
+                demands_path, :class => 'btn' %>
+  </div>
+<% end %>e

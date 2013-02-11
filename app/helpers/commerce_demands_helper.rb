@@ -1,0 +1,2 @@
+module CommerceDemandsHelper
+end

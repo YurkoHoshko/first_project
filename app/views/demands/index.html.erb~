@@ -1,0 +1,56 @@
+<%- model_class = Demand -%>
+<div class="page-header">
+  <h1>Попит</h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th>Район</th>
+      <th>Вулиця</th>
+      <th>Ціна</th>
+      <th>Кількість кімнат</th>
+      
+      
+      <th><%=t '.actions', :default => t("Дії") %></th>
+    </tr>
+
+	 <tr>
+	<%= form_tag demands_path, :method =>'get' do %>
+	<td></td>
+	<td><%= text_field_tag :search, params[:search], :class=> 'input input-small' %></td><td></td>
+    	<td><%= text_field_tag :search1, params[:search1] :class=> 'input input-small'%></td>
+	<td><%= text_field_tag :search2, params[:search2] :class=> 'input input-small'%></td>
+	
+    	<td><%= submit_tag "Search", :name => nil, :class => 'btn btn-medium' %></td>
+  	
+	<% end %>
+
+
+      </tr>
+  </thead>
+  <tbody>
+    <% @demands.each do |demand| %>
+      <tr>
+        <td><%= link_to demand.id, demand_path(demand) %></td>
+        <td><%= demand.district %></td>
+        <td><%= demand.street %></td>
+        <td><%= demand.price %></td>
+        <td><%= demand.count_of_rooms %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("Редагувати")),
+                      edit_demand_path(demand), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("Знищити")),
+                      demand_path(demand),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("Створити")),
+            new_demand_path,
+            :class => 'btn btn-primary' %>

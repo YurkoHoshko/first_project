@@ -1,0 +1,58 @@
+<%- model_class = PrivateRealtyPropose -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:District) %></th>
+      <th><%= model_class.human_attribute_name(:Street) %></th>
+      <th><%= model_class.human_attribute_name(:Price) %></th>
+      <th><%= model_class.human_attribute_name(:Count_of_rooms) %></th>
+      <th><%= model_class.human_attribute_name(:Condition) %></th>
+      <th><%= model_class.human_attribute_name(:Square) %></th>
+      <th><%= model_class.human_attribute_name(:Stage) %></th>
+      <th><%= model_class.human_attribute_name(:Type) %></th>
+      <th><%= model_class.human_attribute_name(:Heating) %></th>
+      <th><%= model_class.human_attribute_name(:Contacts) %></th>
+      <th><%= model_class.human_attribute_name(:Owner) %></th>
+      <th><%= model_class.human_attribute_name(:Other) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @private_realty_proposes.each do |private_realty_propose| %>
+      <tr>
+        <td><%= link_to private_realty_propose.id, private_realty_propose_path(private_realty_propose) %></td>
+        <td><%= private_realty_propose.District %></td>
+        <td><%= private_realty_propose.Street %></td>
+        <td><%= private_realty_propose.Price %></td>
+        <td><%= private_realty_propose.Count_of_rooms %></td>
+        <td><%= private_realty_propose.Condition %></td>
+        <td><%= private_realty_propose.Square %></td>
+        <td><%= private_realty_propose.Stage %></td>
+        <td><%= private_realty_propose.Type %></td>
+        <td><%= private_realty_propose.Heating %></td>
+        <td><%= private_realty_propose.Contacts %></td>
+        <td><%= private_realty_propose.Owner %></td>
+        <td><%= private_realty_propose.Other %></td>
+        <td><%=l private_realty_propose.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_private_realty_propose_path(private_realty_propose), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      private_realty_propose_path(private_realty_propose),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_private_realty_propose_path,
+            :class => 'btn btn-primary' %>

@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  District: MyString
+  Street: MyString
+  Square: 9.99
+  Price: 9.99
+  Count_of_rooms: 1
+  Type: MyString
+  Heating: MyString
+  Furniture: MyString
+  Owner_name: MyString
+  Owner_phone: MyString
+  Other: MyString
+
+two:
+  District: MyString
+  Street: MyString
+  Square: 9.99
+  Price: 9.99
+  Count_of_rooms: 1
+  Type: MyString
+  Heating: MyString
+  Furniture: MyString
+  Owner_name: MyString
+  Owner_phone: MyString
+  Other: MyString

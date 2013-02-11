@@ -1,0 +1,31 @@
+<%- model_class = Demand -%>
+<div class="page-header">
+  <h1>Попит</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong>Район:</strong></dt>
+  <dd><%= @demand.district %></dd>
+  <dt><strong>Вулиця:</strong></dt>
+  <dd><%= @demand.street %></dd>
+  <dt><strong>Ціна:</strong></dt>
+  <dd><%= @demand.price %></dd>
+  <dt><strong>Кількість кімнат:</strong></dt>
+  <dd><%= @demand.count_of_rooms %></dd>
+  <dt><strong>Клієнт:</strong></dt>
+  <dd><%= @demand.owner_name %></dd>
+  <dt><strong>Контакти клієнта:</strong></dt>
+  <dd><%= @demand.owner_phone %></dd>
+</dl>
+
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              demands_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_demand_path(@demand), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              demand_path(@demand),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>

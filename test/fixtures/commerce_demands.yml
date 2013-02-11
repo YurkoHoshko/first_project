@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  district: MyString
+  street: MyString
+  square: 9.99
+  price: 9.99
+  reason: MyString
+  name: MyString
+  phone: MyString
+
+two:
+  district: MyString
+  street: MyString
+  square: 9.99
+  price: 9.99
+  reason: MyString
+  name: MyString
+  phone: MyString

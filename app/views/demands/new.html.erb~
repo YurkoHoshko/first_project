@@ -1,0 +1,5 @@
+<%- model_class = Demand -%>
+<div class="page-header">
+  <h1>Новий запит</h1>
+</div>
+<%= render :partial => 'form' %>

@@ -1,0 +1,75 @@
+<%- model_class = CommercePropose -%>
+<div class="page-header">
+  <h1>Комерційна нерухомість - Пропозиція</h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th>Район</th>
+      <th>Вулиця</th>
+      <th>Площа (кв.м)</th>
+      <th>Ціна (USD)</th>
+      <th>Кількість кімнат</th>
+      <th>Поверх</th>
+      <th>Ремонт</th>
+      <th>Тип будівлі</th>
+      <th>Ж/НЖ Фонд</th>
+      <th>Опалення</th>
+      <th>Умеблювання</th>
+     
+      <th><%=t '.actions', :default => t("Дії") %></th>
+    </tr>
+
+	<tr>
+	<%= form_tag commerce_proposes_path, :method =>'get' do %>
+	<td></td>
+
+	<td><%= select_tag :search, options_from_collection_for_select(@all_proposes, "District", "District"), :multiple=>true, :include_blank=> true %></td>
+    	<td><%= text_field_tag :search1, params[:search1], :class => 'input input-small'%></td>
+	<td><%= text_field_tag :search2, params[:search2], :class => 'input input-mini'%></td>
+	<td></td><td></td>
+	<td><%= text_field_tag :search3, params[:search3], :class => 'input input-mini' %></td>
+	<td><%= text_field_tag :search4, params[:search4], :class => 'input input-mini' %></td>
+	<td></td>
+	<td><%= text_field_tag :search5, params[:search5], :class => 'input input-mini' %>
+	</td><td></td><td></td>
+	
+    	<td><%= submit_tag "Search", :name => nil, :class => 'btn btn-medium' %></td>
+	<% end %>
+      </tr>
+
+  </thead>
+  <tbody>
+    <% @commerce_proposes.each do |commerce_propose| %>
+      <tr>
+        <td><%= link_to commerce_propose.id, commerce_propose_path(commerce_propose) %></td>
+        <td><%= commerce_propose.District %></td>
+        <td><%= commerce_propose.Street %></td>
+        <td><%= commerce_propose.Square %></td>
+        <td><%= commerce_propose.Price %></td>
+        <td><%= commerce_propose.Count_of_rooms %></td>
+	<td><%= commerce_propose.Stage %></td>
+	<td><%= commerce_propose.Condition %></td>
+        <td><%= commerce_propose.Type %></td>
+	<td><%= commerce_propose.Type_fond %></td>
+        <td><%= commerce_propose.Heating %></td>
+        <td><%= commerce_propose.Furniture %></td>
+      
+        <td>
+          <%= link_to t('.edit', :default => t("Редагувати")),
+                      edit_commerce_propose_path(commerce_propose), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("Знищити")),
+                      commerce_propose_path(commerce_propose),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Ви впевнені?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_commerce_propose_path,
+            :class => 'btn btn-primary' %>

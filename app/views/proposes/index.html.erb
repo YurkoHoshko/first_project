@@ -1,0 +1,79 @@
+<%- model_class = Propose -%>
+
+<div class="page-header">
+  <h1>Пропозиція оренди</h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th>Район</th>
+      <th>Адреса</th>
+      <th>Ціна ($)</th>
+      <th>Кількість кімнат</th>
+      <th>Поверх</th>
+      <th>Тип будівлі</th>
+      <th>Опалення</th>
+      <th>Умеблювання</th>
+      <th>Стан</th>
+     
+      <th>Доступність</th>
+      <th>Дії</th>
+    </tr>
+ <tr>
+	<%= form_tag proposes_path, :method =>'get' do %>
+	<td></td>
+	<td><%= text_field_tag :search, params[:search], :class=> 'input input-small' %></td>
+    	<td><%= text_field_tag :search1, params[:search1], :class=> 'input input-small'%></td>
+	<td><%= text_field_tag :search2, params[:search2], :class=> 'input input-mini'%></td>
+	<td><%= text_field_tag :search3, params[:search3], :class=> 'input input-mini' %></td>
+    	<td><%= text_field_tag :search4, params[:search4], :class=> 'input input-mini'%></td>
+	<td><%= text_field_tag :search5, params[:search5], :class=> 'input input-small'%></td>
+	<td><%= text_field_tag :search6, params[:search6], :class=> 'input input-small' %></td>
+    	<td><%= text_field_tag :search7, params[:search7], :class=> 'input input-small'%></td>
+	<td><%= text_field_tag :search8, params[:search8], :class=> 'input input-small'%></td>
+	<td></td>
+    	<td><%= submit_tag "Search", :name => nil, :class => 'btn btn-medium' %></td>
+  	
+	<% end %>
+
+
+      </tr>
+  </thead>
+  <tbody>
+    <% @proposes.each do |propose| %>
+      <tr>
+
+<%x= 'Вільно' if Date.today > propose.Not_able_to  %>
+<%x= 'Зайнято' if Date.today < propose.Not_able_to  %>
+        <td><%= link_to propose.id, propose_path(propose) %></td>
+        <td><%= propose.District %></td>
+        <td><%= propose.Address %></td>
+        <td><%= propose.Price %></td>
+        <td><%= propose.Count_of_rooms %></td>
+        <td><%= propose.Stage %></td>
+        <td><%= propose.House %></td>
+        <td><%= propose.heating %></td>
+        <td><%= propose.furniture %></td>
+        <td><%= propose.condition %></td>
+
+        <td><%= x %></td>
+        
+       
+        <td>
+          <%= link_to  t('.edit', :default => t("Редагувати")),
+                      edit_propose_path(propose), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("Знищити")),
+                      propose_path(propose),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Ви впевнені?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("Новий запис")),
+            new_propose_path,
+            :class => 'btn btn-primary' %>
