@@ -1,44 +1,93 @@
 <%= form_for @demand, :html => { :class => 'form-horizontal' } do |f| %>
-  <div class="control-group">
-    <%= f.label :Район, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :district, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :Вулиця, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :street, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :Ціна, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :price, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :Кількість_кімнат, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.number_field :count_of_rooms, :class => 'number_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :Власник, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :owner_name, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :Контакти_власника, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :owner_phone, :class => 'text_field' %>
-    </div>
-  </div>
 
-  <div class="form-actions">
-    <%= f.submit  :Додати, :class => 'btn btn-primary' %>
+<%@districts=[ "Не вказано","Галицький","Личаківський","Сихівський","Шевченківський","Залізничний","Франківський","Область"]  %>
+<%@rooms=[ "Не вказано", 1, 2, 3, 4, 5, 6, 7, 8, 9]%>
+<%@stages=["Не вказано",0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]%>
+<%@houses= ["Не вказано", "Цегла", "Панель", "Новобудова", "Особняк", "1/2 особняка", "Особн. типу", "Хрущівка", "Австрійський", "Польський", "Старий Львів", "0 цикл" ]%>
+<%@heatings=["Не вказано","Центральне","Пічне","Конвекторне","Індивідуальне","Будинкове","Електричне","Без опалення"]%>
+<%@furnitures=["Не вказано","Нові","Дорогі","Хай-тек","Сучасні","90-х років","Радянські","Частково","Мішані","Без меблів","Класичні","Офісні",]%>
+<%@conditions=["Не вказано","Євроремонт","Під євро","Санітарний","Радянський","Житловий стан","Дизайнерський","Хай-тек","Без ремонту","Нульовий цикл"]%>
+<%@statuses=["Не вказано","Актуально","Не актуально"]%>
+
+  
+<dl class="dl-horizontal">
+
+  <dt><strong>Район:</strong></dt>
+  <dd><strong><%= @demand.district %></strong></dd>
+  <dd><%= f.select :district, options_for_select([@demand.district]+@districts), :class=> "span2"%></dd></br>
+
+  <dt><strong>Вулиця:</strong></dt>
+  <dd><strong><%= @demand.street %></strong></dd>
+  <dd><%= f.text_field :street, :class => 'text_field' %></dd>
+  </br></br>
+
+  <dt><strong>Ціна:</strong></dt>
+  <dd><strong><%= @demand.price %></strong></dd>
+  <dd><%= f.text_field :price, :class => 'text_field' %></dd>
+  </br>  
+
+  <dt><strong>Кількість кімнат:</strong></dt>
+  <dd><strong><%= @demand.Count_of_rooms %></strong></dd>
+  <dd><%= f.text_field :Count_of_rooms, :class=>'text_field'%></dd>
+  </br>
+
+ <dt><strong>Хто житиме:</strong></dt>
+  <dd><strong><%= @demand.reason %></strong></dd>
+    <dd><%= f.text_field :reason, :class => 'text_field' %></dd>
+  </br>
+
+  <dt><strong>Час на пошук:</strong></dt>
+  <dd><strong><%= @demand.Time_to_find %></strong></dd>
+    <dd><%= f.text_field :Time_to_find, :class => 'text_field' %></dd>
+  </br>
+
+  <dt><strong>Термін:</strong></dt>
+  <dd><strong><%= @demand.Term%></strong></dd>
+    <dd><%= f.text_field :Term, :class => 'text_field' %></dd>
+  </br>
+
+
+
+  <dt><strong>Клієнт:</strong></dt>
+  <dd><strong><%= @demand.name %></strong></dd>
+  <dd><%= f.text_field :name, :class => 'text_field' %></dd>
+  </br>
+
+  <dt><strong>Контакти:</strong></dt>
+  <dd><strong><%= @demand.phone %></strong></dd>
+  <dd><%= f.text_field :phone, :class => 'text_field' %></dd>
+   </br> 
+
+<% if  @demand.Last_date.nil?%>
+<% x=@demand.Last_date%>
+<%else%>
+<%x =@demand.Last_date.to_date%>
+<%end%>
+  <dt><strong>Дата:</strong></dt>
+  <dd><strong><%=x%></strong></dd>
+  <dd><%= f.date_select :Last_date, :class => 'date_select' %></dd>
+  </br>
+
+  <dt><strong>Статус:</strong></dt>
+  <dd><strong><%=@demand.Status%></strong></dd>
+  <dd><%= f.select :Status, options_for_select([@demand.Status]+@statuses), :class=> "span1"%></dd>
+  </br>
+
+  <dt><strong>Інше:</strong></dt>
+  <dd><strong><%=@demand.Other%></strong></dd>  
+  <dd> <%= f.text_area:Other, :class => 'text_field', :size=> '25x10' %></dd>
+
+
+
+
+
+
+
+
+
+  <div class="form-actions", style="background:#ffed73">
+    <%= f.submit  :Оновити, :class => 'btn btn-primary' %>
     <%= link_to t('.cancel', :default => t("Відміна")),
                 demands_path, :class => 'btn' %>
   </div>
-<% end %>e
+<% end %>

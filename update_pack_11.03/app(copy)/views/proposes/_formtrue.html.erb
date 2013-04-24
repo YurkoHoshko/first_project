@@ -1,0 +1,88 @@
+<%= form_for @propose, :html => { :class => 'form-horizontal' } do |f| %>
+  
+<div class="control-group">
+    <%= f.label :Район, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :District, raw ("<option> </option><option>Галицький</option><option>Личаківський</option><option>Сихівський</option><option>Шевченківський</option><option>Залізничний</option><option>Франківський</option><option>Область</option>"), :class=> "span2"%>
+    </div>
+</div>
+  
+
+  <div class="control-group">
+    <%= f.label :Адреса, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :Address, :class => 'text_field' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :Ціна, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :Price, :class => 'text_field' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :Кількість_кімнат, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :Count_of_rooms, :class => 'number_field' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :Поверх, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :Stage, :class => 'number_field' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :Будівля, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :House, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Опалення, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :heating, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Умеблювання, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :furniture, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Стан, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :condition, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Власник, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :Owner_name, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Контакти_власника, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :owner_phone, :class => 'text_field' %>
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <%= f.label :Дата, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.date_select :Last_date, :class => 'date_select' %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit :Оновити, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("Відмінити")),
+                proposes_path, :class => 'btn' %>
+  </div>
+<% end %>

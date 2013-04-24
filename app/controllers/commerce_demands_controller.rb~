@@ -1,10 +1,14 @@
 class CommerceDemandsController < ApplicationController
-before_filter  :authenticate_admin!,:except => [:index, :show]  
-  
+before_filter  :authenticate_admin!
+require 'will_paginate/array'
+
+
 
 
   def index
-    @commerce_demand = CommerceDemand.search(params[:search], params[:search1])
+    @commerce_demands_count= CommerceDemand.search(params[:search], params[:search1], params[:statuss],params[:phone]).paginate(:page => params[:page]).count
+    @commerce_demands = CommerceDemand.search(params[:search], params[:search1], params[:statuss],params[:phone]).paginate(:page => params[:page], :per_page=>1)
+     
   end
 
 
@@ -40,7 +44,7 @@ before_filter  :authenticate_admin!,:except => [:index, :show]
 
     respond_to do |format|
       if @commerce_demand.save
-        format.html { redirect_to @commerce_demand, :notice => 'Commerce demand was successfully created.' }
+        format.html { redirect_to @commerce_demand, :notice => 'Запит успішно створено.' }
         format.json { render :json => @commerce_demand, :status => :created, :location => @commerce_demand }
       else
         format.html { render :action => "new" }
@@ -56,7 +60,7 @@ before_filter  :authenticate_admin!,:except => [:index, :show]
 
     respond_to do |format|
       if @commerce_demand.update_attributes(params[:commerce_demand])
-        format.html { redirect_to @commerce_demand, :notice => 'Commerce demand was successfully updated.' }
+        format.html { redirect_to @commerce_demand, :notice => 'Запит успішно оновлено.' }
         format.json { head :no_content }
       else
         format.html { render :action => "edit" }

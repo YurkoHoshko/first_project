@@ -1,8 +1,12 @@
 class PrivateRealtyProposesController < ApplicationController
+
+before_filter :authenticate_admin!
+require 'will_paginate/array' 
   # GET /private_realty_proposes
   # GET /private_realty_proposes.json
   def index
-    @private_realty_proposes = PrivateRealtyPropose.all
+    @private_realty_proposes_count=PrivateRealtyPropose.search(params[:search], params[:search1], params[:search2], params[:search3], params[:search4], params[:search5], params[:search6], params[:statuss],params[:phone]).count
+    @private_realty_proposes = PrivateRealtyPropose.search(params[:search], params[:search1], params[:search2], params[:search3], params[:search4], params[:search5], params[:search6], params[:statuss],params[:phone]).paginate(:page => params[:page], :per_page=>50)
 
     respond_to do |format|
       format.html # index.html.erb

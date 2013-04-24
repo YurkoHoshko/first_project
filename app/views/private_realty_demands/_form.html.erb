@@ -1,74 +1,97 @@
 <%= form_for @private_realty_demand, :html => { :class => 'form-horizontal' } do |f| %>
-  <div class="control-group">
-    <%= f.label :District, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :District, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :Street, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :Street, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :Price, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :Price, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :Count_of_rooms, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.number_field :Count_of_rooms, :class => 'number_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :Condition, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :Condition, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :Square, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :Square, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :Type, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :Type, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :Heating, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :Heating, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :Contacts, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.number_field :Contacts, :class => 'number_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :Buyer, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :Buyer, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :Other, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :Other, :class => 'text_field' %>
-    </div>
-  </div>
+  
+ <%@districts=[ "Не вказано","Галицький","Личаківський","Сихівський","Шевченківський","Залізничний","Франківський","Область"]  %>
+<%@rooms=[ "Не вказано", 1, 2, 3, 4, 5, 6, 7, 8, 9]%>
+<%@stages=["Не вказано",0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]%>
+<%@houses= ["Не вказано", "Цегла", "Панель", "Новобудова", "Особняк", "1/2 особняка", "Особн. типу", "Хрущівка", "Австрійський", "Польський", "Старий Львів", "0 цикл" ]%>
+<%@heatings=["Не вказано","Центральне","Пічне","Конвекторне","Індивідуальне","Будинкове","Електричне","Без опалення"]%>
+<%@furnitures=["Не вказано","Нові","Дорогі","Хай-тек","Сучасні","90-х років","Радянські","Частково","Мішані","Без меблів","Класичні","Офісні","Є"]%>
+<%@conditions=["Не вказано","Євроремонт","Під євро","Санітарний","Радянський","Житловий стан","Дизайнерський","Хай-тек","Без ремонту","Нульовий цикл"]%>
+<%@statuses=["Не вказано","Актуально","Не актуально"]%> 
 
-  <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+
+
+
+
+
+<dl class="dl-horizontal">
+
+  <dt><strong>Район:</strong></dt>
+  <dd><strong><%= @private_realty_demand.District %></strong></dd>
+  <dd><%= f.select :District, options_for_select([@private_realty_demand.District]+@districts), :class=> "span1"%></dd></br>
+
+  <dt><strong>Адреса:</strong></dt>
+  <dd><strong><%= @private_realty_demand.Street %></strong></dd>
+  <dd><%= f.text_field :Street, :class => 'text_field' %></dd>
+  </br></br>
+
+  <dt><strong>Ціна:</strong></dt>
+  <dd><strong><%= @private_realty_demand.Price %></strong></dd>
+  <dd><%= f.text_field :Price, :class => 'text_field' %></dd>
+  </br>  
+
+  <dt><strong>Кількість кімнат:</strong></dt>
+  <dd><strong><%= @private_realty_demand.Count_of_rooms %></strong></dd>
+  <dd><%= f.text_field :Count_of_rooms, :class=>'text_field'%></dd>
+  </br>
+
+  
+  <dt><strong>Будівля:</strong></dt>
+  <dd><strong><%= @private_realty_demand.Type %></strong></dd>
+  <dd><%= f.select :Type, options_for_select([@private_realty_demand.Type]+@houses), :class=> "span1"%></dd>
+  </br>
+
+  <dt><strong>Опалення:</strong></dt>
+  <dd><strong><%= @private_realty_demand.Heating %></strong></dd>
+  <dd><%= f.select :Heating, options_for_select([@private_realty_demand.Heating]+@heatings), :class=> "span1"%></dd>
+  </br>
+
+  <dt><strong>Площа:</strong></dt>
+  <dd><strong><%= @private_realty_demand.Square %></strong></dd>
+  <dd><%= f.text_field :Square, :class=> "span1"%></dd>
+  </br>
+
+  <dt><strong>Стан:</strong></dt>
+  <dd><strong><%= @private_realty_demand.Condition %></strong></dd>
+  <dd><%= f.select :Condition, options_for_select([@private_realty_demand.Condition]+@conditions), :class=> "span1"%></dd>
+  </br>
+
+  <dt><strong>Клієнт:</strong></dt>
+  <dd><strong><%= @private_realty_demand.Buyer%></strong></dd>
+  <dd><%= f.text_field :Buyer, :class => 'text_field' %></dd>
+  </br>
+
+  <dt><strong>Контакти:</strong></dt>
+  <dd><strong><%= @private_realty_demand.Contacts %></strong></dd>
+  <dd><%= f.text_field :Contacts, :class => 'text_field' %></dd>
+   </br> 
+
+<% if  @private_realty_demand.Last_date.nil?%>
+<% x=@private_realty_demand.Last_date%>
+<%else%>
+<%x =@private_realty_demand.Last_date.to_date%>
+<%end%>
+  <dt><strong>Дата:</strong></dt>
+  <dd><strong><%=x%></strong></dd>
+  <dd><%= f.date_select :Last_date, :class => 'date_select' %></dd>
+  </br>
+
+  <dt><strong>Статус:</strong></dt>
+  <dd><strong><%=@private_realty_demand.Status%></strong></dd>
+  <dd><%= f.select :Status,options_for_select([@private_realty_demand.Status]+@statuses), :class=> "span1"%></dd>
+  </br>
+
+  <dt><strong>Інше:</strong></dt>
+  <dd><strong><%=@private_realty_demand.Other%></strong></dd>  
+  <dd> <%= f.text_area:Other, :class => 'text_field', :size=> '25x10' %></dd>
+
+
+</dl>
+
+<div class="form-actions", style="background:#ffed73">
+    <%= f.submit :Оновити, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("Відмінити")),
                 private_realty_demands_path, :class => 'btn' %>
   </div>
 <% end %>
+

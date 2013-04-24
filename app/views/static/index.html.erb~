@@ -1,0 +1,254 @@
+
+    <style type="text/css" media="screen">
+      body {
+        margin: 0;
+        margin-bottom: 25px;
+        padding: 0;
+        background-color: #f0f0f0;
+        font-family: "Lucida Grande", "Bitstream Vera Sans", "Verdana";
+        font-size: 13px;
+        color: #333;
+      }
+
+      h1 {
+        font-size: 28px;
+        color: #000;
+      }
+
+      a  {color: #03c}
+      a:hover {
+        background-color: #03c;
+        color: white;
+        text-decoration: none;
+      }
+
+
+      #page {
+        background-color: #f0f0f0;
+        width: 750px;
+        margin: 0;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      #content {
+        float: left;
+        background-color: white;
+        border: 3px solid #aaa;
+        border-top: none;
+        padding: 25px;
+        width: 500px;
+      }
+
+      #sidebar {
+        float: right;
+        width: 175px;
+      }
+
+      #footer {
+        clear: both;
+      }
+
+      #header, #about, #getting-started {
+        padding-left: 75px;
+        padding-right: 30px;
+      }
+
+
+      #header {
+        background-image: url("assets/rails.png");
+        background-repeat: no-repeat;
+        background-position: top left;
+        height: 64px;
+      }
+      #header h1, #header h2 {margin: 0}
+      #header h2 {
+        color: #888;
+        font-weight: normal;
+        font-size: 16px;
+      }
+
+
+      #about h3 {
+        margin: 0;
+        margin-bottom: 10px;
+        font-size: 14px;
+      }
+
+      #about-content {
+        background-color: #ffd;
+        border: 1px solid #fc0;
+        margin-left: -55px;
+        margin-right: -10px;
+      }
+      #about-content table {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-size: 11px;
+        border-collapse: collapse;
+      }
+      #about-content td {
+        padding: 10px;
+        padding-top: 3px;
+        padding-bottom: 3px;
+      }
+      #about-content td.name  {color: #555}
+      #about-content td.value {color: #000}
+
+      #about-content ul {
+        padding: 0;
+        list-style-type: none;
+      }
+
+      #about-content.failure {
+        background-color: #fcc;
+        border: 1px solid #f00;
+      }
+      #about-content.failure p {
+        margin: 0;
+        padding: 10px;
+      }
+
+
+      #getting-started {
+        border-top: 1px solid #ccc;
+        margin-top: 25px;
+        padding-top: 15px;
+      }
+      #getting-started h1 {
+        margin: 0;
+        font-size: 20px;
+      }
+      #getting-started h2 {
+        margin: 0;
+        font-size: 14px;
+        font-weight: normal;
+        color: #333;
+        margin-bottom: 25px;
+      }
+      #getting-started ol {
+        margin-left: 0;
+        padding-left: 0;
+      }
+      #getting-started li {
+        font-size: 18px;
+        color: #888;
+        margin-bottom: 25px;
+      }
+      #getting-started li h2 {
+        margin: 0;
+        font-weight: normal;
+        font-size: 18px;
+        color: #333;
+      }
+      #getting-started li p {
+        color: #555;
+        font-size: 13px;
+      }
+
+
+      #sidebar ul {
+        margin-left: 0;
+        padding-left: 0;
+      }
+      #sidebar ul h3 {
+        margin-top: 25px;
+        font-size: 16px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #ccc;
+      }
+      #sidebar li {
+        list-style-type: none;
+      }
+      #sidebar ul.links li {
+        margin-bottom: 5px;
+      }
+
+      .filename {
+        font-style: italic;
+      }
+    </style>
+    <script type="text/javascript">
+      function about() {
+        info = document.getElementById('about-content');
+        if (window.XMLHttpRequest)
+          { xhr = new XMLHttpRequest(); }
+        else
+          { xhr = new ActiveXObject("Microsoft.XMLHTTP"); }
+        xhr.open("GET","rails/info/properties",false);
+        xhr.send("");
+        info.innerHTML = xhr.responseText;
+        info.style.display = 'block'
+      }
+    </script>
+  </head>
+  <body>
+
+    <div id="page">
+      <div id="sidebar">
+        <ul id="sidebar-items">
+          <li>
+            <h3>Лінки на основні таблиці</h3>
+            <ul class="links">
+              <li><%= link_to "Оренда приватної нерухомості - Пропозиція", :controller => "proposes", :action => "index" %></li>
+              <li><%= link_to "Оренда приватної нерухомості - Попит", :controller => "demands", :action => "index" %></li>
+	      <li><%= link_to "Продаж приватної нерухомості - Пропозиція", :controller => "private_realty_proposes", :action => "index" %></li>
+              <li><%= link_to "Продаж приватної нерухомості - Попит", :controller => "private_realty_demands", :action => "index" %></li>
+              <li><%= link_to "Комерція - Пропозиція", :controller => "commerce_proposes", :action => "index" %>
+              <li><%= link_to "Комерція - Попит", :controller => "commerce_demands", :action => "index" %></li>
+            </ul>
+           </li>
+	 </ul>
+	
+<ul id="sidebar-items">
+		<%if admin_signed_in? %>
+	        	<%case current_admin.level%>
+	                <%when 1 then%>
+				<h5><%= link_to "Вийти з системи", destroy_admin_session_path, :method => :delete%><h5>
+				<h5><%= link_to "Адміністраторська панель",  :controller => "admins", :action => "index" %><h5>
+       			<%else %>
+				<h5><%= link_to "Вийти з системи", destroy_admin_session_path, :method => :delete%><h5>
+			<% end %> 
+		<%else%>
+			<h5><%= link_to "Ввійти в систему", new_admin_session_path%><h3>
+		<% end %>
+</ul>
+       
+      </div>
+
+      <div id="content">
+        <div id="header">
+          <h1>Ласкаво просимо</h1>
+        </div>
+
+
+        <div id="getting-started">
+          <h1>Початок роботи</h1>
+          <h2>Як користуватись додатком:</h2>
+
+          <ol>
+            <li>
+              <h2>Виберіть необхідну таблицю</h2>
+              <p>Посилання на таблиці розміщені справа</p>
+            </li>
+
+            <li>
+              <h2>Є два режими роботи: звичайного та зареєстрованого користувача</span></h2>
+              <p>Звичайному користувачу доступний лише перегляд даних. Зареєстрований користувач може створювати, редагувати та видаляти записи.</span>.</p>
+            </li>
+
+            <li>
+              <h2>Увійдіть у систему та використайте усі її можливості.</h2>
+              <p>Для цього клацніть по посиланню Реєстрація - для реєстрації, або Вхід - для авторизації</p>
+            </li>
+          </ol>
+        </div>
+
+
+      
+      
+      <div id="footer">&nbsp;</div>
+	
+    </div>
+  </body>
+

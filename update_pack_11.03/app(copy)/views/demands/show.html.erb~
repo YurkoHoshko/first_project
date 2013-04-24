@@ -1,0 +1,43 @@
+<%- model_class = Demand -%>
+<div class="page-header">
+  <h1>Оренда приватної нерухомості - Попит</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong>Район:</strong></dt>
+  <dd><%= @demand.district %></dd>
+  <dt><strong>Вулиця:</strong></dt>
+  <dd><%= @demand.street %></dd>
+  <dt><strong>Ціна:</strong></dt>
+  <dd><%= @demand.price %></dd>
+  <dt><strong>Кількість кімнат:</strong></dt>
+  <dd><%= @demand.Count_of_rooms %></dd>
+  <dt><strong>Хто житиме:</strong></dt>
+  <dd><%= @demand.reason %></dd>
+  <dt><strong>Час на пошук:</strong></dt>
+  <dd><%= @demand.Time_to_find %></dd>
+  <dt><strong>Термін оренди:</strong></dt>
+  <dd><%= @demand.Term %></dd>
+  <dt><strong>Клієнт:</strong></dt>
+  <dd><%= @demand.name %></dd>
+  <dt><strong>Контакти клієнта:</strong></dt>
+  <dd><%= @demand.phone %></dd>
+  <dt><strong>Статус:</strong></dt>
+  <dd><%=@demand.Status%></dd>
+  <dt><strong>Дата дзвінка:</strong></dt>
+  <dd><%=@demand.Last_date.to_date%></dd>
+  <dt><strong>Інше:</strong></dt>
+  <dd><%=@demand.Other%></dd>  
+</dl>
+
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("Повернутися")),
+              demands_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("Редагувати")),
+              edit_demand_path(@demand), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("Знищити")),
+              demand_path(@demand),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>

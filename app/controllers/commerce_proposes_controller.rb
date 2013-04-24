@@ -1,9 +1,11 @@
 class CommerceProposesController < ApplicationController
-before_filter  :authenticate_admin!,:except => [:index, :show]
+before_filter  :authenticate_admin!
+require 'will_paginate/array'
   # GET /commerce_proposes
   # GET /commerce_proposes.json
   def index
-    @commerce_proposes = CommercePropose.search(params[:search], params[:search1], params[:search2], params[:search3], params[:search4], params[:search5])
+    @commerce_proposes_count=CommercePropose.search(params[:search], params[:search1], params[:search2], params[:search3], params[:search4], params[:search5], params[:statuss],params[:phone]).paginate(:page => params[:page]).count
+    @commerce_proposes = CommercePropose.search(params[:search], params[:search1], params[:search2], params[:search3], params[:search4], params[:search5], params[:statuss],params[:phone]).paginate(:page => params[:page], :per_page=>50)
     @all_proposes = CommercePropose.all
   end
 

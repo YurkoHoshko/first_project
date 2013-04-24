@@ -1,0 +1,55 @@
+<%- model_class = CommercePropose -%>
+<div class="page-header">
+  <h1>Комерційна нерухомість - Пропозиція</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong>Район:</strong></dt>
+  <dd><%= @commerce_propose.District %></dd>
+  <dt><strong>Вулиця:</strong></dt>
+  <dd><%= @commerce_propose.Street %></dd>
+  <dt><strong>Площа (кв.м):</strong></dt>
+  <dd><%= @commerce_propose.Square %></dd>
+  <dt><strong>Ціна (USD):</strong></dt>
+  <dd><%= @commerce_propose.Price %></dd>
+  <dt><strong>Кількість кімнат:</strong></dt>
+  <dd><%= @commerce_propose.Count_of_rooms %></dd>
+  <dt><strong>Поверх:</strong></dt>
+  <dd><%= @commerce_propose.Stage %></dd>
+  <dt><strong>Ремонт:</strong></dt>
+  <dd><%= @commerce_propose.Condition %></dd>
+  <dt><strong>Тип приміщення:</strong></dt>
+  <dd><%= @commerce_propose.Type %></dd>
+  <dt><strong>Житловий фонд:</strong></dt>
+  <dd><%= @commerce_propose.Type_fond %></dd>
+  <dt><strong>Опалення:</strong></dt>
+  <dd><%= @commerce_propose.Heating %></dd>
+  <dt><strong>Умеблювання:</strong></dt>
+  <dd><%= @commerce_propose.Furniture %></dd>
+  <dt><strong>Ім'я власника:</strong></dt>
+  <dd><%= @commerce_propose.Owner_name %></dd>
+  <dt><strong>Контакти власника:</strong></dt>
+  <dd><%= @commerce_propose.Owner_phone %></dd>
+  <dt><strong>Примітки:</strong></dt>
+  <dd><%= @commerce_propose.Other %></dd>
+  <dt><strong>Статус:</strong></dt>
+  <dd><%= @commerce_propose.Status %></dd>
+  <dt><strong>Дата дзвінка:</strong></dt>
+  <dd><%= @commerce_propose.Last_date.to_date %></dd>
+</dl>
+
+<div class="form-actions">
+  <%if current_admin.level!=1%>
+<%= link_to t('.back', :default => t("Назад")),
+              commerce_proposes_path, :class => 'btn'  %>
+<%else%>
+<%= link_to t('.back', :default => t("Назад")),
+              commerce_proposes_path, :class => 'btn'  %>
+<%= link_to t('.edit', :default => t("Редагувати")),
+              edit_commerce_propose_path(@propose), :class => 'btn' %>
+<%= link_to t('.destroy', :default => t("Знищити")),
+              commerce_propose_path(@propose),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Ви впевнені?')) },
+              :class => 'btn btn-danger' %>
+</div>

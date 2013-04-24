@@ -1,0 +1,7 @@
+<% if admin_signed_in? %>
+  Привіт, <%= current_admin.email%></br>
+  <%= link_to('Вийти з системи', destroy_admin_session_path, :method => :delete) %>        
+<% else %>
+  <%= link_to('Ввійти в систему', new_admin_session_path)  %>  
+  
+<% end %>

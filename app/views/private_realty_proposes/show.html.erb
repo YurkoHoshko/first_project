@@ -1,43 +1,51 @@
 <%- model_class = PrivateRealtyPropose -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+  <h1>Продаж приватної нерухомості - Пропозиція</h1>
 </div>
 
 <dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:District) %>:</strong></dt>
-  <dd><%= @private_realty_propose.District %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:Street) %>:</strong></dt>
-  <dd><%= @private_realty_propose.Street %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:Price) %>:</strong></dt>
-  <dd><%= @private_realty_propose.Price %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:Count_of_rooms) %>:</strong></dt>
-  <dd><%= @private_realty_propose.Count_of_rooms %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:Condition) %>:</strong></dt>
-  <dd><%= @private_realty_propose.Condition %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:Square) %>:</strong></dt>
-  <dd><%= @private_realty_propose.Square %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:Stage) %>:</strong></dt>
-  <dd><%= @private_realty_propose.Stage %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:Type) %>:</strong></dt>
-  <dd><%= @private_realty_propose.Type %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:Heating) %>:</strong></dt>
-  <dd><%= @private_realty_propose.Heating %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:Contacts) %>:</strong></dt>
-  <dd><%= @private_realty_propose.Contacts %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:Owner) %>:</strong></dt>
-  <dd><%= @private_realty_propose.Owner %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:Other) %>:</strong></dt>
-  <dd><%= @private_realty_propose.Other %></dd>
+  <dt><strong>Район:</strong></dt>
+  <dd><%= @private_realty_propose.District %>;</dd>
+  <dt><strong>Вулиця:</strong></dt>
+  <dd><%= @private_realty_propose.Street %>;</dd>
+  <dt><strong>Ціна:</strong></dt>
+  <dd><%= @private_realty_propose.Price %>;</dd>
+  <dt><strong>Кількість_кімнат:</strong></dt>
+  <dd><%= @private_realty_propose.Count_of_rooms %>;</dd>
+  <dt><strong>Стан:</strong></dt>
+  <dd><%= @private_realty_propose.Condition %>;;</dd>
+  <dt><strong>Площа:</strong></dt>
+  <dd><%= @private_realty_propose.Square %>;</dd>
+  <dt><strong>Поверх:</strong></dt>
+  <dd><%= @private_realty_propose.Stage %>;</dd>
+  <dt><strong>Тип_будівлі:</strong></dt>
+  <dd><%= @private_realty_propose.Type %>;</dd>
+  <dt><strong>Опалення:</strong></dt>
+  <dd><%= @private_realty_propose.Heating %>;</dd>
+  <dt><strong>Контакти:</strong></dt>
+  <dd><%= @private_realty_propose.Contacts %>;</dd>
+  <dt><strong>Власник:</strong></dt>
+  <dd><%= @private_realty_propose.Owner %>;</dd>
+  <dt><strong>Дата дзвінка:</strong></dt>
+  <dd><%= @private_realty_propose.Last_date.to_date %>;</dd>
+  <dt><strong>Статус:</strong></dt>
+  <dd><%= @private_realty_propose.Status %>;</dd>
+  <dt><strong>Примітки:</strong></dt>
+  <dd><%= @private_realty_propose.Other %>;</dd>
 </dl>
 
-<div class="form-actions">
-  <%= link_to t('.back', :default => t("helpers.links.back")),
+<%if current_admin.level!=1%>
+<%= link_to t('.back', :default => t("Назад")),
               private_realty_proposes_path, :class => 'btn'  %>
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+<%else%>
+<%= link_to t('.back', :default => t("Назад")),
+             private_realty_proposes_path, :class => 'btn'  %>
+<%= link_to t('.edit', :default => t("Редагувати")),
               edit_private_realty_propose_path(@private_realty_propose), :class => 'btn' %>
-  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+<%= link_to t('.destroy', :default => t("Знищити")),
               private_realty_propose_path(@private_realty_propose),
               :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Ви впевнені?')) },
               :class => 'btn btn-danger' %>
+<%end%>
 </div>

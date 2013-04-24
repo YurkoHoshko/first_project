@@ -1,9 +1,7 @@
 <% if admin_signed_in? %>
-  <li>
-  <%= link_to('Logout', destroy_admin_session_path, :method => :delete) %>        
-  </li>
+  Привіт, <%= current_admin.email%>
+  <%= link_to('Вийти з системи', destroy_admin_session_path, :method => :delete) %>        
 <% else %>
-  <li>
-  <%= link_to('Login', new_admin_session_path)  %>  
-  </li>
+  <%= link_to('Ввійти в систему', new_admin_session_path)  %>  
+  
 <% end %>

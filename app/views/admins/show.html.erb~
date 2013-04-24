@@ -1,0 +1,28 @@
+<%- model_class = Admin -%>
+<div class="page-header">
+  <h1>Користувачі</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dd><strong>Логін:</strong> <%= @admin.email %></dd>
+  <dd><strong>Час початку останньої сесії:</strong> <%= @admin.current_sign_in_at %></dd>
+  <dd><strong>Час останнього входу в систему: </strong><%= @admin.last_sign_in_at %></dd>
+  <dd><strong>Час створення користувача:</strong> <%= @admin.created_at %></dd>
+</dl>
+
+<div class="form-actions", style="background:#ffed73">
+  
+
+
+
+<%= link_to t('.back', :default => t("Назад")),
+              admins_path, :class => 'btn'  %>
+<%= link_to t('.edit', :default => t("Редагувати")),
+              edit_admin_path(@admin), :class => 'btn' %>
+<%= link_to t('.destroy', :default => t("Знищити")),
+              admin_path(@admin),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Ви впевнені?')) },
+              :class => 'btn btn-danger' %>
+
+</div>

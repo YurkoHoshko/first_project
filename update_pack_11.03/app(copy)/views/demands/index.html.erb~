@@ -1,0 +1,84 @@
+<%- model_class = Demand -%>
+<div class="page-header">
+<a href="index"  align="middle">Повернутись на головну сторінку</a>
+  <h6>Оренда приватної нерухомості - Попит</h6>
+</div>
+<table class="table table-condensed">
+  <thead>
+<%= link_to t('.new', :default => t("Створити")),
+            new_demand_path,
+            :class => 'btn btn-primary' %>
+    <tr >
+      <th ><%= model_class.human_attribute_name(:id) %></th>
+      <th >Район</th>
+      <th class="span4">Вулиця</th>
+      <th class="span4">Хто проживатиме</th>
+      <th >Ціна</th>
+      <th >Час на пошуки</th>
+      <th >Термін оренди</th>
+      <th >Кількість кімнат</th>
+      <th >Дата останнього дзвінка</th>
+      <th >Статус</th>
+      <th>Номер телефону</th>
+      
+      <th><%=t '.actions', :default => t("Дії") %></th>
+      
+    </tr>
+
+	 <tr>
+	<%= form_tag demands_path, :method =>'get' do %>
+	<td></td>
+		<td><%= select_tag "search", raw ("<<option></option>option>Не вказано</option><option>Галицький</option><option>Личаківський</option><option>Сихівський</option><option>Шевченківський</option><option>Залізничний</option><option>Франківський</option><option>Область</option>"), :class=> "span1"%></td> <td></td><td></td><td></td><td></td>
+    	<td></td>
+	<td><%= select_tag "search2",raw ("<option></option><option>Не вказано</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option>"), :class=>'span1'%></td><td></td>
+<%if current_admin.level!=1%>
+ <td><h6>Актуально</h6></td>
+
+ <%else%>
+	<td><%= select_tag :statuss, raw ("<option></option><option>Не вказано</option><option>Актуально</option><option>Не актуально</option>"), :class=> "span1"%></td>
+<% end %>
+
+    	
+	<td><%= text_field_tag :phone, params[:phone], :class=> 'span1'%></td>
+    	<td><%= submit_tag "Search", :name => nil, :class => 'btn btn-medium' %></td>
+  	
+	<% end %>
+
+
+      </tr>
+  </thead>
+  <tbody>
+    <% @demands.each do |demand| %>
+      <tr>
+        <td><%= link_to demand.id, demand_path(demand) %></td>
+        <td><%= demand.district %></td>
+        <td><%= demand.street %></td>
+	<td><%= demand.reason %></td>
+        <td><%= demand.price %></td>
+        <td><%= demand.Time_to_find %></td>
+	<td><%= demand.Term %></td>
+        <td><%= demand.Count_of_rooms %></td>
+        <td><%= demand.Last_date.to_date%></td>
+        <td><%= demand.Status %></td>
+        
+        <td>
+		<%if current_admin.level!=1%>
+ 		<%= link_to  t('.edit', :default => t("Перегляд")),
+                      demand_path(demand), :class => 'btn btn-mini' %>
+
+ 		<%else%>
+		<%= link_to  t('.edit', :default => t("Перегляд")),
+                      demand_path(demand), :class => 'btn btn-mini' %>
+		<%= link_to  t('.edit', :default => t("Редагувати")),
+                      edit_demand_path(demand), :class => 'btn btn-mini' %>
+		<% end %>
+         
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to t('.new', :default => t("Створити")),
+            new_demand_path,
+            :class => 'btn btn-primary' %>
+

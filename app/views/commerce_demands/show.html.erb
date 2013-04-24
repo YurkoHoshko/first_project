@@ -1,33 +1,44 @@
 <%- model_class = CommerceDemand -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+  <h1>Комерційна нерухомість - Попит</h1>
 </div>
 
 <dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:district) %>:</strong></dt>
-  <dd><%= @commerce_demand.district %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:street) %>:</strong></dt>
-  <dd><%= @commerce_demand.street %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:square) %>:</strong></dt>
-  <dd><%= @commerce_demand.square %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:price) %>:</strong></dt>
-  <dd><%= @commerce_demand.price %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:reason) %>:</strong></dt>
-  <dd><%= @commerce_demand.reason %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
-  <dd><%= @commerce_demand.name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:phone) %>:</strong></dt>
-  <dd><%= @commerce_demand.phone %></dd>
+  <dt><strong>Район:</strong></dt>
+  <dd><%= @commerce_demand.district %>;</dd>
+  <dt><strong>Вулиця:</strong></dt>
+  <dd><%= @commerce_demand.street %>;</dd>
+  <dt><strong>Площа:</strong></dt>
+  <dd><%= @commerce_demand.square %>;</dd>
+  <dt><strong>Ціна:</strong></dt>
+  <dd><%= @commerce_demand.price %>;</dd>
+  <dt><strong>Спосіб використання:</strong></dt>
+  <dd><%= @commerce_demand.reason %>;</dd>
+ <dt><strong>Статус:</strong></dt>
+  <dd><%= @commerce_demand.Status %>;</dd>
+ <dt><strong>Дата дзвінка:</strong></dt>
+  <dd><%= @commerce_demand.Last_date.to_date %>;</dd>
+  <dt><strong>Клієнт:</strong></dt>
+  <dd><%= @commerce_demand.name %>;</dd>
+  <dt><strong>Контакти:</strong></dt>
+  <dd><%= @commerce_demand.phone %>;</dd>
+   <dt><strong>Інше:</strong></dt>
+  <dd><%= @commerce_demand.Other%>;</dd>
 </dl>
 
-<div class="form-actions">
-  <%= link_to t('.back', :default => t("helpers.links.back")),
+<div class="form-actions", style="background:#ffed73">
+  <%if current_admin.level!=1%>
+<%= link_to t('.back', :default => t("Назад")),
               commerce_demands_path, :class => 'btn'  %>
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+<%else%>
+<%= link_to t('.back', :default => t("Назад")),
+              commerce_demands_path, :class => 'btn'  %>
+<%= link_to t('.edit', :default => t("Редагувати")),
               edit_commerce_demand_path(@commerce_demand), :class => 'btn' %>
-  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+<%= link_to t('.destroy', :default => t("Знищити")),
               commerce_demand_path(@commerce_demand),
               :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Ви впевнені?')) },
               :class => 'btn btn-danger' %>
+<%end%>
 </div>

@@ -1,79 +1,167 @@
 <%- model_class = Propose -%>
+<body style="background:#ffed73" >
+<div   id="panel" class="span12"  style=" position:fixed;background:#ff8940;" >
 
-<div class="page-header">
-  <h1>Пропозиція оренди</h1>
-</div>
-<table class="table table-striped">
-  <thead>
+ <%= render 'devise/menu/login_items' %>
+<%= link_to "Повернутися на головну сторінку", :controller => "static", :action => "index" %>
+  <h6 >Оренда приватної нерухомості - Пропозиція</h6>
+<p>Кількість позицій в базі даних - <%=@proposescount%></p>
+<table class="table table-condensed">
+
+
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
+
       <th>Район</th>
       <th>Адреса</th>
-      <th>Ціна ($)</th>
-      <th>Кількість кімнат</th>
+
+      <th>Кімнати</th>
       <th>Поверх</th>
       <th>Тип будівлі</th>
       <th>Опалення</th>
-      <th>Умеблювання</th>
+      <th>Меблі</th>
       <th>Стан</th>
-     
-      <th>Доступність</th>
-      <th>Дії</th>
+
+      <th>Статус</th>
+      <th>Номер телефону</th>
+      <th></th>
+
     </tr>
  <tr>
 	<%= form_tag proposes_path, :method =>'get' do %>
-	<td></td>
-	<td><%= text_field_tag :search, params[:search], :class=> 'input input-small' %></td>
-    	<td><%= text_field_tag :search1, params[:search1], :class=> 'input input-small'%></td>
-	<td><%= text_field_tag :search2, params[:search2], :class=> 'input input-mini'%></td>
-	<td><%= text_field_tag :search3, params[:search3], :class=> 'input input-mini' %></td>
-    	<td><%= text_field_tag :search4, params[:search4], :class=> 'input input-mini'%></td>
-	<td><%= text_field_tag :search5, params[:search5], :class=> 'input input-small'%></td>
-	<td><%= text_field_tag :search6, params[:search6], :class=> 'input input-small' %></td>
-    	<td><%= text_field_tag :search7, params[:search7], :class=> 'input input-small'%></td>
-	<td><%= text_field_tag :search8, params[:search8], :class=> 'input input-small'%></td>
-	<td></td>
-    	<td><%= submit_tag "Search", :name => nil, :class => 'btn btn-medium' %></td>
-  	
-	<% end %>
 
 
-      </tr>
+
+
+
+	<td><%= select_tag "search", raw ("<option></option><option>Не вказано</option><option>Галицький</option><option>Личаківський</option><option>Сихівський</option><option>Шевченківський</option><option>Залізничний</option><option>Франківський</option><option>Область</option>"), :class=> "span1"%></td>
+
+
+    	<td><%= text_field_tag :search1, params[:search1], :class=> 'input input-medium'%></td>
+
+
+	<td><%= select_tag "search3",raw ("<option></option><option>Не вказано</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option>"), :class=>'span1'%></td>
+
+    	<td><%= select_tag "search4",raw ("<option></option><option>Не вказано</option><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option>"), :class=>'span1'%></td>
+
+	<td><%= select_tag "search5", raw ("<option></option><option>Не вказано</option><option>Цегла</option><option>Панель</option><option>Новобудова</option><option>Особняк</option><option>1/2 особняка</option><option>Особн. типу</option><option>Хрущівка</option><option>Австрійський</option><option>Польський</option><option>Старий Львів</option><option>0 цикл</option>"), :class=> "span1"%></td>
+
+	<td><%= select_tag "search6", raw ("<option></option><option>Не вказано</option><option>Центральне</option><option>Будинкове</option><option>Індивідуальне</option><option>Конвекторне</option><option>Електричне</option><option>Пічне</option><option>Без опалення</option>"), :class=> "span1"%></td>
+
+
+   <td><%= select_tag "search7", raw ("<option></option><option>Не вказано</option><option>Нові</option><option>Сучасні</option><option>Дорогі</option><option>90-х років</option><option>Радянські</option><option>Частково</option><option>Мішані</option><option>Без меблів</option><option>Офісні</option><option>Класичні</option><option>Є</option><option>Хай-тек</option>"), :class=> "span1"%></td>
+
+	<td><%= select_tag "search8", raw ("<option></option><option>Не вказано</option><option>Євроремонт</option><option>Під євро</option><option>Санітарний</option><option>Радянський</option><option>Житловий стан</option><option>Дизайнерський</option><option>Хай-тек</option><option>Без ремонту</option><option>Нульовий цикл</option>"), :class=> "span1"%></td>
+
+
+<%if current_admin.level!=1%>
+
+<td><h6>Актуально</h6></td>
+<%else%>
+<td><%= select_tag :statuss, raw ("<option></option><option>Не вказано</option><option>Актуально</option><option>Не актуально</option>"), :class=> "span1"%></td>
+<% end %>
+<td><%= text_field_tag :phone, params[:phone], :class=> 'span1'%></td>
+<td><%= submit_tag "Search", :name => nil, :class => 'btn btn-medium' %></td>
+<%end%>
+</tr>
+
+
+
+</table>
+
+
+
+</div>
+</br></br></br></br></br></br></br></br></br></br></br>
+<div class="span12">
+<table id="sort" class="table table-condensed" >
+  <thead ></br></br>
+<%= link_to t('.new', :default => t("Новий запис")), new_propose_path, :class => 'btn btn-success', :style=>"background:#3d9200" %>
+    <tr >
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th>Район</th>
+      <th>Адреса</th>
+      <th>Ціна </th>
+      <th>Кімнати</th>
+      <th>Поверх</th>
+      <th>Тип будівлі</th>
+      <th>Опалення</th>
+      <th>Меблі</th>
+      <th>Стан</th>
+      <th>Дата  дзвінка</th>
+      <th>Статус</th>
+      <th>Ім'я</th>
+      <th>Дії</th>
+
+    </tr>
+
+
+
+
+
   </thead>
-  <tbody>
-    <% @proposes.each do |propose| %>
-      <tr>
+  <tbody >
 
-<%x= 'Вільно' if Date.today > propose.Not_able_to  %>
-<%x= 'Зайнято' if Date.today < propose.Not_able_to  %>
+    <% @proposes.each do |propose| %>
+      <tr >
+
+
         <td><%= link_to propose.id, propose_path(propose) %></td>
         <td><%= propose.District %></td>
         <td><%= propose.Address %></td>
         <td><%= propose.Price %></td>
-        <td><%= propose.Count_of_rooms %></td>
-        <td><%= propose.Stage %></td>
+        <td style="text-align:center"><%= propose.Count_of_rooms %></td>
+        <td style="text-align:center"><%= propose.Stage %></td>
         <td><%= propose.House %></td>
         <td><%= propose.heating %></td>
         <td><%= propose.furniture %></td>
         <td><%= propose.condition %></td>
+	<td><%= propose.Last_date.to_date%></td>
+	<td><%= propose.Status%></td>
+        <td><%= propose.Owner_name %></td>
+        <td></td>
 
-        <td><%= x %></td>
-        
-       
+
         <td>
-          <%= link_to  t('.edit', :default => t("Редагувати")),
-                      edit_propose_path(propose), :class => 'btn btn-mini' %>
-          <%= link_to t('.destroy', :default => t("Знищити")),
-                      propose_path(propose),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Ви впевнені?')) },
-                      :class => 'btn btn-mini btn-danger' %>
+		<%if current_admin.level !=1%>
+ 		<%= link_to  t('.edit', :default => t("Перегляд")),
+                      propose_path(propose), :class => 'btn btn-mini', :style=>'background:#00C322' %>
+
+ 		<%else%>
+		<%= link_to  t('.edit', :default => t("Перегляд")),
+                      propose_path(propose), :class => 'btn btn-mini', :style=>'background:#00C322' %>
+		<%= link_to  t('.edit', :default => t("Редагувати")),
+                      edit_propose_path(propose), :class => 'btn btn-mini', :style=>'background:#ff8940' %>
+
+		<% end %>
+
+
+
         </td>
       </tr>
-    <% end %>
-  </tbody>
-</table>
 
-<%= link_to t('.new', :default => t("Новий запис")),
-            new_propose_path,
-            :class => 'btn btn-primary' %>
+    <% end %>
+<tr><strong><%= will_paginate @proposes %></strong></tr>
+  </tbody>
+
+</table>
+<tr><strong><%= will_paginate @proposes %></strong></tr>
+<%= link_to t('.new', :default => t("Новий запис")), new_propose_path, :class => 'btn btn-primary',:style=>"background:#3d9200" %>
+</div>
+
+
+
+
+
+
+</body>
+<script type="text/javascript">
+$(document).ready(function(){
+
+	$(".btn-slide").click(function(){
+		$("#panel").slideToggle("slow");
+		$(this).toggleClass("active"); return false;
+	});
+
+
+});
+</script>

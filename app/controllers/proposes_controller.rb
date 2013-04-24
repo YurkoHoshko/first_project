@@ -1,19 +1,43 @@
 class ProposesController < ApplicationController
-
-
-
-before_filter:authenticate_admin!, :except => [:index, :show] 
-
-
+before_filter :authenticate_admin! 
+require 'will_paginate/array' 
   # GET /proposes
 
   # GET /proposes.json
   def index
-    @proposes = Propose.search (params[:search],params[:search1],params[:search2],params[:search3],params[:search4],params[:search5],params[:search6],params[:search7],params[:search8])
+
+params[:min_price] = case current_admin.level
+	when 1 then -1
+	when 2 then 2800
+	when 3 then 2400
+	when 4 then -1
+        else 0
+end
+
+params[:max_price] = case current_admin.level
+	when 1 then 100000
+	when 2 then 100000
+	when 3 then 5000
+	when 4 then 2800
+	else 0
+end
+
+params[:statuss] = case current_admin.level
+	when 1 then params[:statuss]
+	when 2 then "Актуально"
+	when 3 then "Актуально"
+	when 4 then "Актуально"
+	else 0
+end
+    @proposescount=Propose.search (params[:search],params[:search1],params[:search3],params[:search4],params[:search5],params[:search6],params[:search7],params[:search8], params[:statuss], params[:min_price],params[:max_price],params[:phone]).count
+    @proposes = Propose.search (params[:search],params[:search1],params[:search3],params[:search4],params[:search5],params[:search6],params[:search7],params[:search8], params[:statuss], params[:min_price],params[:max_price],params[:phone]).paginate(:page => params[:page], :per_page=>50)
+    
+    
   end
 
   # GET /proposes/1
   # GET /proposes/1.json
+
   def show
     @propose = Propose.find(params[:id])
 

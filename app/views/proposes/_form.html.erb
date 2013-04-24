@@ -1,79 +1,98 @@
 <%= form_for @propose, :html => { :class => 'form-horizontal' } do |f| %>
-  <div class="control-group">
-    <%= f.label :Район, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :District, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :Адреса, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :Address, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :Ціна, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :Price, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :Кількість_кімнат, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.number_field :Count_of_rooms, :class => 'number_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :Поверх, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.number_field :Stage, :class => 'number_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :Будівля, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :House, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :Опалення, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :heating, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :Умеблювання, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :furniture, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :Стан, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :condition, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :Власник, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :Owner_name, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :Контакти_власника, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :owner_phone, :class => 'text_field' %>
-    </div>
-  </div>
-  
-  <div class="control-group">
-    <%= f.label :Зайнято_до, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.date_select :Not_able_to, :class => 'date_select' %>
-    </div>
-  </div>
 
-  <div class="form-actions">
+
+<%@districts=[ "Не вказано","Галицький","Личаківський","Сихівський","Шевченківський","Залізничний","Франківський","Область"]  %>
+<%@rooms=[ "Не вказано", 1, 2, 3, 4, 5, 6, 7, 8, 9]%>
+<%@stages=["Не вказано",0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]%>
+<%@houses= ["Не вказано", "Цегла", "Панель", "Новобудова", "Особняк", "1/2 особняка", "Особн. типу", "Хрущівка", "Австрійський", "Польський", "Старий Львів", "0 цикл" ]%>
+<%@heatings=["Не вказано","Центральне","Пічне","Конвекторне","Індивідуальне","Будинкове","Електричне","Без опалення"]%>
+<%@furnitures=["Не вказано","Нові","Дорогі","Хай-тек","Сучасні","90-х років","Радянські","Частково","Мішані","Без меблів","Класичні","Офісні","Є"]%>
+<%@conditions=["Не вказано","Євроремонт","Під євро","Санітарний","Радянський","Житловий стан","Дизайнерський","Хай-тек","Без ремонту","Нульовий цикл"]%>
+<%@statuses=["Не вказано","Актуально","Не актуально"]%>
+
+<dl class="dl-horizontal">
+
+<dt><strong>Район:</strong></dt>
+  <dd><strong><%= @propose.District %></strong></dd>
+  <dd><%= f.select :District,options_for_select( [@propose.District]+@districts), :class=>"span2"%></dd></br>
+
+
+  
+  <dt><strong>Адреса:</strong></dt>
+  <dd><strong><%= @propose.Address %></strong></dd>
+  <dd><%= f.text_field :Address, :class => 'text_field' %></dd>
+  </br></br>
+
+  <dt><strong>Ціна:</strong></dt>
+  <dd><strong><%= @propose.Price %></strong></dd>
+  <dd><%= f.text_field :Price, :class => 'text_field' %></dd>
+  </br>  
+
+  <dt><strong>Кількість кімнат:</strong></dt>
+  <dd><strong><%= @propose.Count_of_rooms %></strong></dd>
+ <dd><%= f.select :Count_of_rooms,options_for_select( [@propose.Count_of_rooms]+@rooms), :class=>"span1"%></dd></br>
+
+  <dt><strong>Поверх:</strong></dt>
+  <dd><strong><%= @propose.Stage %></strong></dd>
+  <dd><%= f.select :Stage,options_for_select( [@propose.Stage]+@stages), :class=>"span1"%></dd>
+  </br>
+
+  <dt><strong>Будівля:</strong></dt>
+  <dd><strong><%= @propose.House %></strong></dd>
+  <dd><%= f.select :House, options_for_select( [@propose.House]+@houses), :class=>"span1"%></dd>
+  </br>
+
+  <dt><strong>Опалення:</strong></dt>
+  <dd><strong><%= @propose.heating %></strong></dd>
+  <dd><%= f.select :heating, options_for_select( [@propose.heating]+@heatings), :class=>"span1"%></dd>
+  </br>
+
+  <dt><strong>Умеблювання:</strong></dt>
+  <dd><strong><%= @propose.furniture %></strong></dd>
+  <dd><%= f.select :furniture, options_for_select([@propose.furniture]+@furnitures), :class=> "span1"%></dd>
+  </br>
+
+  <dt><strong>Стан:</strong></dt>
+  <dd><strong><%= @propose.condition %></strong></dd>
+  <dd><%= f.select :condition, options_for_select([@propose.condition]+@conditions), :class=> "span1"%></dd>
+  </br>
+
+  <dt><strong>Власник:</strong></dt>
+  <dd><strong><%= @propose.Owner_name %></strong></dd>
+  <dd><%= f.text_field :Owner_name, :class => 'text_field' %></dd>
+  </br>
+
+  <dt><strong>Контакти власника:</strong></dt>
+  <dd><strong><%= @propose.owner_phone %></strong></dd>
+  <dd><%= f.text_field :owner_phone, :class => 'text_field' %></dd>
+   </br> 
+
+<% if  @propose.Last_date.nil?%>
+<% x=@propose.Last_date%>
+<%else%>
+<%x =@propose.Last_date.to_date%>
+<%end%>
+  <dt><strong>Дата:</strong></dt>
+  <dd><strong><%=x%></strong></dd>
+  <dd><%= f.date_select :Last_date, :class => 'date_select' %></dd>
+  </br>
+
+  <dt><strong>Статус:</strong></dt>
+  <dd><strong><%=@propose.Status%></strong></dd>
+  <dd><%= f.select :Status, options_for_select([@propose.Status]+@statuses), :class=> "span1"%></dd>
+  </br>
+
+  <dt><strong>Інше:</strong></dt>
+  <dd><strong><%=@propose.Other%></strong></dd>  
+  <dd> <%= f.text_area :Other, :class => 'text_field', :size=> '25x10' %></dd>
+
+
+</dl>
+
+
+
+
+ <div class="form-actions", style="background:#ffed73">
     <%= f.submit :Оновити, :class => 'btn btn-primary' %>
     <%= link_to t('.cancel', :default => t("Відмінити")),
                 proposes_path, :class => 'btn' %>

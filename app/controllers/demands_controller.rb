@@ -1,8 +1,33 @@
 class DemandsController < ApplicationController
-before_filter  :authenticate_admin!,:except => [:index, :show]  
+before_filter  :authenticate_admin!
+require 'will_paginate/array' 
 
    def index
-    @demands = Demand.search(params[:search], params[:search1], params[:search2])
+
+params[:min_price] = case current_admin.level
+	when 1 then -1
+	when 2 then 2800
+	when 3 then 2400
+	when 4 then -1
+        else 0
+end
+
+params[:max_price] = case current_admin.level
+	when 1 then 100000
+	when 2 then 100000
+	when 3 then 5000
+	when 4 then 2800
+	else 0
+end
+
+params[:statuss] = case current_admin.level
+	when 1 then  params[:statuss]
+	when 2 then "Актуально"
+	when 3 then "Актуально"
+	when 4 then "Актуально"
+end
+    @demandscount=Demand.search(params[:search], params[:search2], params[:min_price],params[:max_price],params[:statuss],params[:phone]).count
+    @demands = Demand.search(params[:search], params[:search2], params[:min_price],params[:max_price],params[:statuss],params[:phone]).paginate(:page => params[:page], :per_page=>50)
   end
 
 

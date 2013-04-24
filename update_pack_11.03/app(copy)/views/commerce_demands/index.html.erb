@@ -1,0 +1,85 @@
+<%- model_class = CommerceDemand -%>
+
+
+
+<div class="page-header">
+  <a href="index"  align="middle">Повернутись на головну сторінку</a>
+  <h6>Комерційна нерухомість - Попит</h6>
+</div>
+<table class="table table-condensed">
+  <thead>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_commerce_demand_path,
+            :class => 'btn btn-primary' %>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th>Район </th>
+      <th>Вулиця</th>
+      <th>Площа</th>
+      <th>Ціна</th>
+      <th>Спосіб використання</th>
+      <th>Статус</th>
+      <th>Дата останнього дзвінка<th>
+	  <th>Номер телефону</th>
+      <th>Дії</th>
+    </tr>
+  
+
+ <tr>
+	<%= form_tag commerce_demands_path, :method =>'get' do %>
+	<td></td>
+		<td><%= select_tag "search", raw ("<option></option><option>Не вказано</option><option>Галицький</option><option>Личаківський</option><option>Сихівський</option><option>Шевченківський</option><option>Залізничний</option><option>Франківський</option><option>Область</option>"), :class=> "span2"%></td>
+    	<td><%= text_field_tag :search1, params[:search1] %></td>
+	<td></td><td></td><td></td>
+<%if current_admin.level!=1%>
+ <td><h6>Актуально</h6></td>
+
+ <%else%>
+	<td><%= select_tag :statuss, raw ("<option></option><option>Не вказано</option><option>Актуально</option><option>Не актуально</option>"), :class=> "span1"%></td>
+<% end %>
+
+
+
+
+<td></td><td></td>
+    	<td><%= text_field_tag :phone, params[:phone], :class=> 'span1'%></td>
+    	<td><%= submit_tag "Search", :name => nil, :class => 'btn btn-medium' %></td>
+  	
+	<% end %>
+
+
+      </tr>
+</thead>
+  <tbody>
+<tr></tr>
+    <% @commerce_demands.each do |commerce_demand| %>
+     
+      <tr>
+        <td><%= link_to commerce_demand.id, commerce_demand_path(commerce_demand) %></td>
+        <td><%= commerce_demand.district %></td>
+        <td><%= commerce_demand.street %></td>
+        <td><%= commerce_demand.square %></td>
+        <td><%= commerce_demand.price %></td>
+        <td><%= commerce_demand.reason %></td>
+	<td><%= commerce_demand.Status %></td>
+	<td><%= commerce_demand.Last_date.to_date %></td><td></td><td></td>
+        <td>
+		<%if current_admin.level!=1%>
+ 		<%= link_to  t('.edit', :default => t("Перегляд")),
+                      commerce_demand_path(commerce_demand), :class => 'btn btn-mini' %>
+
+ 		<%else%>
+		<%= link_to  t('.edit', :default => t("Перегляд")),
+                      commerce_demand_path(commerce_demand), :class => 'btn btn-mini' %>
+		<%= link_to  t('.edit', :default => t("Редагувати")),
+                      edit_commerce_demand_path(commerce_demand), :class => 'btn btn-mini' %>
+		<% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_commerce_demand_path,
+            :class => 'btn btn-primary' %>

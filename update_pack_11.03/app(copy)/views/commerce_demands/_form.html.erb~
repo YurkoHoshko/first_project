@@ -1,0 +1,67 @@
+<%= form_for @commerce_demand, :html => { :class => 'form-horizontal' } do |f| %>
+
+<dl class="dl-horizontal">
+
+  <dt><strong>Район:</strong></dt>
+  <dd><strong><%= @commerce_demand.district %></strong></dd>
+  <dd><%= f.select :district, raw ("<option>Не вказано</option><option>Галицький</option><option>Личаківський</option><option>Сихівський</option><option>Шевченківський</option><option>Залізничний</option><option>Франківський</option><option>Область</option>"), :class=> "span2"%></dd></br>
+
+  <dt><strong>Адреса:</strong></dt>
+  <dd><strong><%= @commerce_demand.street %></strong></dd>
+  <dd><%= f.text_field :street, :class => 'text_field' %></dd>
+  </br></br>
+
+  <dt><strong>Ціна:</strong></dt>
+  <dd><strong><%= @commerce_demand.price %></strong></dd>
+  <dd><%= f.text_field :price, :class => 'text_field' %></dd>
+  </br>  
+
+  <dt><strong>Площа:</strong></dt>
+  <dd><strong><%= @commerce_demand.square %></strong></dd>
+  <dd><%= f.text_field :square, :class => 'text_field' %></dd>
+  </br>
+  
+  <dt><strong>Спосіб використання:</strong></dt>
+  <dd><strong><%= @commerce_demand.reason %></strong></dd>
+  <dd><%= f.text_field :reason, :class => 'text_field' %></dd>
+  </br>
+
+  <dt><strong>Клієнт:</strong></dt>
+  <dd><strong><%= @commerce_demand.name %></strong></dd>
+  <dd><%= f.text_field :name, :class => 'text_field' %></dd>
+  </br>
+
+  <dt><strong>Контакти:</strong></dt>
+  <dd><strong><%= @commerce_demand.phone %></strong></dd>
+  <dd><%= f.text_field :phone, :class => 'text_field' %></dd>
+   </br> 
+
+<% if  @commerce_demand.Last_date.nil?%>
+<% x=@commerce_demand.Last_date%>
+<%else%>
+<%x =@commerce_demand.Last_date.to_date%>
+<%end%>
+  <dt><strong>Дата:</strong></dt>
+  <dd><strong><%=x%></strong></dd>
+  <dd><%= f.date_select :Last_date, :class => 'date_select' %></dd>
+  </br>
+
+  <dt><strong>Статус:</strong></dt>
+  <dd><strong><%=@commerce_demand.Status%></strong></dd>
+  <dd><%= f.select :Status, raw ("<option> </option><option>Не вказано</option><option>Актуально</option><option>Не актуально</option>"), :class=> "span1"%></dd>
+  </br>
+
+  <dt><strong>Інше:</strong></dt>
+  <dd><strong><%=@commerce_demand.Other%></strong></dd>  
+  <dd> <%= f.text_area:Other, :class => 'text_field', :size=> '25x10' %></dd>
+
+
+</dl>
+
+
+  <div class="form-actions">
+    <%= f.submit :Оновити, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                commerce_demands_path, :class => 'btn' %>
+  </div>
+<% end %>

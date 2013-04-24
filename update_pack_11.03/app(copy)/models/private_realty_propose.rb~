@@ -1,0 +1,10 @@
+class PrivateRealtyPropose < ActiveRecord::Base
+
+def self.search(search,search1,search2,search3,search4,search5,search6,statuss,phone)
+ if search
+    find(:all, :conditions => ['District LIKE ? and Street LIKE ? and Count_of_rooms LIKE ?  and  Condition LIKE ? and Stage LIKE ? and Type LIKE ? and Heating LIKE ? and Status LIKE?',"%#{search}%" ,"%#{search1}%","%#{search2}%","%#{search3}%","%#{search4}%","%#{search5}%","%#{search6}%","%#{statuss}%"])
+  else
+    find(:all)
+end
+end
+end

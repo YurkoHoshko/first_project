@@ -2,9 +2,35 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-if (Date.today > propose.Not_able_to) 
-	{propose.Able=True;
-	}
-else 
-	{propose.Able=false;
-	}
+( function () {    
+    var nav = $( '#tabla' )[0],
+        top = $( nav ).offset().top,
+        left,
+        height = $( nav ).outerHeight(),
+        width = $( nav ).width(),
+        fixedClass = 'fixed';
+
+    function pageOffset() {
+        return window.pageYOffset || document.body.scrollTop;
+    }
+
+    $( window ).
+            resize( function () {
+                left = $( nav ).offset().left;
+            }).
+            scroll( function () {
+                $( nav ).toggleClass( fixedClass, pageOffset() > top );
+
+                if ( $( nav ).hasClass( fixedClass ) ) {
+                    $( nav ).
+                        css({ 'left': left, 'width': width }).
+                        prev().css({ 'marginBottom': height });
+                } else {
+                    $( nav ).
+                        prev().andSelf().removeAttr( 'style' );
+                }
+            }).
+            trigger( 'resize' );    
+})();
+
+

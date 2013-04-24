@@ -1,0 +1,39 @@
+<%= form_for @admin, :html => { :class => 'form-horizontal' } do |f| %>
+
+<%@levels=[1,2,3,4]%>
+
+<dl class="dl-horizontal">
+
+
+
+  
+  <dt><strong>Логін:</strong></dt>
+  <dd><strong><%= @admin.email %></strong></dd>
+  <dd><%= f.text_field :email, :class => 'text_field' %></dd>
+  </br></br>
+
+  <dt><strong>Пароль:</strong></dt>
+  <dd><%= f.password_field :password, :class => 'text_field' %></dd>
+  </br>  
+
+  <dt><strong>Підтвердження паролю:</strong></dt>
+ 
+  <dd><%= f.password_field :password_confirmation, :class => 'text_field' %></dd></br>
+
+  <dt><strong>Рівень користувача:</strong></dt>
+ 
+  <dd><%= f.select :level,options_for_select( [@admin.level]+@levels), :class=>"span1"%></dd>
+  </br>
+
+
+</dl>
+
+
+
+
+ <div class="form-actions", style="background:#ffed73">
+    <%= f.submit :Оновити, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("Відмінити")),
+                admins_path, :class => 'btn' %>
+  </div>
+<% end %>

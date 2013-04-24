@@ -1,0 +1,96 @@
+<%= form_for @commerce_propose, :html => { :class => 'form-horizontal' } do |f| %>
+<dl class="dl-horizontal">
+
+  <dt><strong>Район:</strong></dt>
+  <dd><strong><%= @commerce_propose.District %></strong></dd>
+  <dd><%= f.select :District, raw ("<option>Не вказано</option><option>Галицький</option><option>Личаківський</option><option>Сихівський</option><option>Шевченківський</option><option>Залізничний</option><option>Франківський</option><option>Область</option>"), :class=> "span2"%></dd></br>
+
+  <dt><strong>Адреса:</strong></dt>
+  <dd><strong><%= @commerce_propose.Street %></strong></dd>
+  <dd><%= f.text_field :Street, :class => 'text_field' %></dd>
+  </br></br>
+
+  <dt><strong>Ціна:</strong></dt>
+  <dd><strong><%= @commerce_propose.Price %></strong></dd>
+  <dd><%= f.text_field :Price, :class => 'text_field' %></dd>
+  </br>  
+
+  <dt><strong>Площа:</strong></dt>
+  <dd><strong><%= @commerce_propose.Square %></strong></dd>
+  <dd><%= f.text_field :Square, :class => 'text_field' %></dd>
+  </br>
+
+  <dt><strong>Кількість кімнат:</strong></dt>
+  <dd><strong><%= @commerce_propose.Count_of_rooms %></strong></dd>
+  <dd><%= f.select :Count_of_rooms ,raw ("<option>Не вказано</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option>"), :class=>'span1'%></dd>
+  </br>
+
+  <dt><strong>Поверх:</strong></dt>
+  <dd><strong><%= @commerce_propose.Stage %></strong></dd>
+  <dd><%= f.select :Stage,raw ("<option>Не вказано</option><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option>"), :class=>'span1'%></dd>
+  </br>
+
+  <dt><strong>Будівля:</strong></dt>
+  <dd><strong><%= @commerce_propose.Type %></strong></dd>
+  <dd><%= f.select :Type, raw ("<option>Не вказано</option><option>Цегла</option><option>Панель</option><option>Новобудова</option><option>Особняк</option><option>1/2 особняка</option><option>Особн. типу</option><option>Хрущівка</option><option>Австрійський</option><option>Польський</option><option>Старий Львів</option><option>0 цикл</option>"), :class=> "span1"%></dd>
+  </br>
+
+  <dt><strong>Опалення:</strong></dt>
+  <dd><strong><%= @commerce_propose.Heating %></strong></dd>
+  <dd><%= f.select :Heating, raw ("<option>Не вказано</option><option>Центральне</option><option>Будинкове</option><option>Індивідуальне</option><option>Конвекторне</option><option>Електричне</option><option>Без опалення</option>"), :class=> "span1"%></dd>
+  </br>
+
+  <dt><strong>Ж/НЖ Фонд:</strong></dt>
+  <dd><strong><%= @commerce_propose.Type_fond %></strong></dd>
+  <dd><%= f.text_field :Type_fond, :class => 'text_field' %></dd>
+  </br>  
+
+
+  <dt><strong>Умеблювання:</strong></dt>
+  <dd><strong><%= @commerce_propose.Furniture %></strong></dd>
+  <dd><%= f.select :Furniture, raw ("<option>Не вказано</option><option>Нові</option><option>Сучасні</option><option>Дорогі</option><option>90-х років</option><option>Радянські</option><option>Частково</option><option>Мішані</option><option>Без меблів</option><option>Офісні</option><option>Класичні</option>"), :class=> "span1"%></dd>
+  </br>
+
+  <dt><strong>Стан:</strong></dt>
+  <dd><strong><%= @commerce_propose.Condition %></strong></dd>
+  <dd><%= f.select :Condition, raw ("<option>Не вказано</option><option>Євроремонт</option><option>Під євро</option><option>Санітарний</option><option>Радянський</option><option>Житловий стан</option><option>Без ремонту</option><option>Нульовий цикл</option>"), :class=> "span1"%></dd>
+  </br>
+
+  <dt><strong>Власник:</strong></dt>
+  <dd><strong><%= @commerce_propose.Owner_name %></strong></dd>
+  <dd><%= f.text_field :Owner_name, :class => 'text_field' %></dd>
+  </br>
+  <dt><strong>Контакти власника:</strong></dt>
+  <dd><strong><%= @commerce_propose.Owner_phone %></strong></dd>
+  <dd><%= f.text_field :Owner_phone, :class => 'text_field' %></dd>
+   </br> 
+
+<% if  @commerce_propose.Last_date.nil?%>
+<% x=@commerce_propose.Last_date%>
+<%else%>
+<%x =@commerce_propose.Last_date.to_date%>
+<%end%>
+  <dt><strong>Дата:</strong></dt>
+  <dd><strong><%=x%></strong></dd>
+  <dd><%= f.date_select :Last_date, :class => 'date_select' %></dd>
+  </br>
+
+  <dt><strong>Статус:</strong></dt>
+  <dd><strong><%=@commerce_propose.Status%></strong></dd>
+  <dd><%= f.select :Status, raw ("<option> </option><option>Не вказано</option><option>Актуально</option><option>Не актуально</option>"), :class=> "span1"%></dd>
+  </br>
+
+  <dt><strong>Інше:</strong></dt>
+  <dd><strong><%=@commerce_propose.Other%></strong></dd>  
+  <dd> <%= f.text_area:Other, :class => 'text_field', :size=> '25x10' %></dd>
+
+
+</dl>
+
+
+  <div class="form-actions">
+    <%= f.submit :Оновити, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("Відміна")),
+                commerce_proposes_path, :class => 'btn' %>
+  </div>
+<% end %>

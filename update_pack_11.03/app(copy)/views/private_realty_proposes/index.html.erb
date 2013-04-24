@@ -1,0 +1,93 @@
+<%- model_class = PrivateRealtyPropose -%>
+
+
+<div class="page-header">
+  <a href="index"  align="middle">Повернутись на головну сторінку</a>
+  <h6>Продаж приватної нерухомості - Пропозиція</h6>
+</div>
+<table class="table table-condensed">
+  <thead>
+<%= link_to t('.new', :default => t("Створити")),
+            new_private_realty_propose_path,
+            :class => 'btn btn-primary' %>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th>Район</th>
+      <th>Вулиця</th>
+      <th>Ціна</th>
+      <th>Кількість кімнат</th>
+      <th>Стан</th>
+      <th>Площа</th>
+      <th>Поверх</th>
+      <th>Тип будівлі</th>
+      <th>Опалення</th>
+      <th>Дата останнього дзвінка</th>
+      <th>Статус</th>
+      <th>Номер телефону</th>
+      <th>Дії</th>
+    </tr>
+	<tr>
+	<%= form_tag private_realty_proposes_path, :method =>'get' do %>
+	<td></td>
+	<td><%= select_tag "search", raw ("<option></option><option>Не вказано</option><option>Галицький</option><option>Личаківський</option><option>Сихівський</option><option>Шевченківський</option><option>Залізничний</option><option>Франківський</option><option>Область</option>"), :class=> "span2"%></td>
+    	<td><%= text_field_tag :search1, params[:search1], :class=> 'input input-small'%></td><td></td>
+
+	<td><%= select_tag "search2",raw ("<option></option><option>Не вказано</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option>"), :class=>'span1'%></td>
+
+	<td><%= select_tag "search3", raw ("<option></option><option>Не вказано</option><option>Євроремонт</option><option>Під євро</option><option>Санітарний</option><option>Радянський</option><option>Житловий стан</option><option>Без ремонту</option><option>Нульовий цикл</option><option>Хай-тек</option><option>Дизайнерський</option>"), :class=> "span1"%></td><td></td>
+
+    	<td><%= select_tag "search4",raw ("<option></option><option>Не вказано</option><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option>"), :class=>'span1'%>
+
+	<td><%= select_tag "search5", raw ("<option></option><option>Не вказано</option><option>Цегла</option><option>Панель</option><option>Новобудова</option><option>Особняк</option><option>1/2 особняка</option><option>Особн. типу</option><option>Хрущівка</option><option>Австрійський</option><option>Польський</option><option>Старий Львів</option><option>0 цикл</option>"), :class=> "span1"%></td>
+
+
+	<td><%= select_tag "search6", raw ("<option></option><option>Не вказано</option><option>Пічне</option><option>Центральне</option><option>Будинкове</option><option>Індивідуальне</option><option>Конвекторне</option><option>Електричне</option><option>Без опалення</option>"), :class=> "span1"%></td><th></th>
+<%if current_admin.level!=1%>
+ <td><h6>Актуально</h6></td>
+
+ <%else%>
+	<td><%= select_tag :statuss, raw ("<option></option><option>Не вказано</option><option>Актуально</option><option>Не актуально</option>"), :class=> "span1"%></td>
+<% end %>
+	<td><%= text_field_tag :phone, params[:phone], :class=> 'span1'%></td>
+    	<td><%= submit_tag "Search", :name => nil, :class => 'btn btn-medium' %></td>
+
+    	
+  	
+	<% end %>
+      </tr>
+  </thead>
+  <tbody>
+    <% @private_realty_proposes.each do |private_realty_propose| %>
+      <tr>
+        <td><%= link_to private_realty_propose.id, private_realty_propose_path(private_realty_propose) %></td>
+        <td><%= private_realty_propose.District %></td>
+        <td><%= private_realty_propose.Street %></td>
+        <td><%= private_realty_propose.Price %></td>
+        <td><%= private_realty_propose.Count_of_rooms %></td>
+        <td><%= private_realty_propose.Condition %></td>
+        <td><%= private_realty_propose.Square %></td>
+        <td><%= private_realty_propose.Stage %></td>
+        <td><%= private_realty_propose.Type %></td>
+        <td><%= private_realty_propose.Heating %></td>
+        <td><%= private_realty_propose.Last_date.to_date %></td>
+        <td><%= private_realty_propose.Status %></td><td></td>
+        <td>
+		<%if current_admin.level!=1%>
+ 		<%= link_to  t('.edit', :default => t("Перегляд")),
+                      private_realty_propose_path(private_realty_propose), :class => 'btn btn-mini' %>
+
+ 		<%else%>
+		<%= link_to  t('.edit', :default => t("Перегляд")),
+                      private_realty_propose_path(private_realty_propose), :class => 'btn btn-mini' %>
+		<%= link_to  t('.edit', :default => t("Редагувати")),
+                      edit_private_realty_propose_path(private_realty_propose), :class => 'btn btn-mini' %>
+		<% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("Створити")),
+            new_private_realty_propose_path,
+            :class => 'btn btn-primary' %>
